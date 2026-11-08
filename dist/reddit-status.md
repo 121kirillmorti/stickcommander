@@ -1,7 +1,9 @@
-# Reddit status (updated)
+# Social status (updated)
 
 Posts are written in the language of each community: English for English-speaking subs,
-Russian for Russian-speaking subs. Every post uses different text.
+Russian for Russian-speaking ones. Every post uses different text.
+
+## Reddit
 
 | Subreddit | Language | Post | Status | Notes |
 | --- | --- | --- | --- | --- |
@@ -20,3 +22,12 @@ Rejected targets (rules/risk): r/hacking, r/netsec, r/cybersecurity, r/HowToHack
 (English-only, self-promotion banned), r/RuProgrammers (advertising banned),
 r/Pikabu (karma gate), r/Neurath, r/chillrussians, r/ruAsska, r/rusAskReddit
 (advertising/spam rules). r/nyarchlinux is restricted with 185 members.
+
+## Twitter / X
+
+Account: https://x.com/kotiktortiktech
+
+| Language | Tweet | Posted |
+| --- | --- | --- |
+| RU | https://x.com/kotiktortiktech/status/2119366518735798540 | 2026-11-08 09:48 UTC |
+| EN | https://x.com/kotiktortiktech/status/2119366586918408204 | 2026-11-08 09:49 UTC |
