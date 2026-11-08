@@ -20,3 +20,6 @@ firmware/stickcommander_adapter/build/
 firmware/backup/*.bin
 firmware/stock/*.bin
 firmware/bruce-build/*.bin
+
+# release artifacts (attached to GitHub releases, not committed)
+dist/*.zip
