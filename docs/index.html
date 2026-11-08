@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StickCommander — control your M5StickC Plus 2 from your phone</title>
+<meta name="description" content="Android app + Bruce 1.16.1 firmware patch: live menu mirror, screen drawing, IR blaster, LittleFS file manager and terminal for the M5StickC Plus 2.">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="assets/logo.svg" alt="">StickCommander</a>
+    <nav class="top">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#install">Install</a>
+      <a href="#build">Build</a>
+      <a href="https://github.com/121kirillmorti/stickcommander">GitHub</a>
+      <a class="lang" href="ru/">Русский</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Android + Bruce 1.16.1</span>
+      <h1>Your Stick, on your <span>phone screen</span>.</h1>
+      <p class="lead">
+        StickCommander mirrors the real Bruce menu of an M5StickC Plus 2, draws text on its
+        135×240 display, fires IR codes, browses LittleFS and streams a full terminal —
+        over USB-OTG or Bluetooth LE.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="https://github.com/121kirillmorti/stickcommander/releases/latest/download/StickCommander-debug.apk">Download APK</a>
+        <a class="btn ghost" href="https://github.com/121kirillmorti/stickcommander/releases/latest/download/Bruce-m5stack-cplus2.bin">Download firmware</a>
+        <a class="btn ghost" href="https://github.com/121kirillmorti/stickcommander">Source</a>
+      </div>
+      <div class="meta">
+        <span>GPL-safe: AGPL-3.0 firmware source included</span>
+        <span>Android 8.0+</span>
+        <span>ESP32 · 8 MB flash</span>
+      </div>
+    </div>
+    <div class="phone-shot">
+      <img src="images/dashboard.png" alt="StickCommander dashboard">
+    </div>
+  </section>
+
+  <section id="features" class="anchor">
+    <h2>Six screens, one cable</h2>
+    <p class="sub">Everything the Stick can do, grouped where you need it. The app talks to the
+      firmware in both directions: telemetry and menu state come back, commands go out.</p>
+
+    <div class="grid g3">
+      <div class="card">
+        <div class="icon">◉</div>
+        <h3>Live Stick menu</h3>
+        <p>Reads the firmware's real option list — title, labels, disabled entries and the
+          current selection — and refreshes every second. Tap an item to open it on the Stick.</p>
+      </div>
+      <div class="card">
+        <div class="icon">▤</div>
+        <h3>Screen mirror + drawing</h3>
+        <p>A text mirror of the UI on your phone, plus a canvas in the other direction: send
+          text and the Stick renders it on its own TFT.</p>
+      </div>
+      <div class="card">
+        <div class="icon">⌁</div>
+        <h3>IR blaster</h3>
+        <p>NEC, Samsung and Sony (12/15/20 bit) with hex inputs and one-tap presets. The Stick
+          emits, the phone just tells it what to send.</p>
+      </div>
+      <div class="card">
+        <div class="icon">▦</div>
+        <h3>File manager</h3>
+        <p>Browse LittleFS, preview text files, upload your own file in 256-byte chunks with a
+          progress bar, create folders, rename and delete.</p>
+      </div>
+      <div class="card">
+        <div class="icon">⌘</div>
+        <h3>Remote control</h3>
+        <p>Virtual D-pad and M5/A/B/PWR press-and-hold buttons. Every press and release is a
+          separate event, so long presses work exactly like on the device.</p>
+      </div>
+      <div class="card">
+        <div class="icon">▮</div>
+        <h3>Terminal &amp; scripts</h3>
+        <p>Filtered logs, raw command input, plus phone-side scripts you can upload to the
+          Stick and run without touching the device.</p>
+      </div>
+    </div>
+
+    <div class="shots" style="margin-top:26px">
+      <div class="shot"><img src="images/tools-menu.png" alt="Live menu"><span>Tools · Live menu</span></div>
+      <div class="shot"><img src="images/tools-screen.png" alt="Screen"><span>Tools · Screen</span></div>
+      <div class="shot"><img src="images/tools-ir.png" alt="IR blaster"><span>Tools · IR</span></div>
+      <div class="shot"><img src="images/tools-files.png" alt="Files"><span>Tools · Files</span></div>
+    </div>
+    <div class="shots" style="margin-top:14px">
+      <div class="shot"><img src="images/remote.png" alt="Remote"><span>Remote</span></div>
+      <div class="shot"><img src="images/dashboard.png" alt="Dashboard"><span>Dashboard</span></div>
+      <div class="shot" style="grid-column:span 2;display:flex;align-items:center;justify-content:center;padding:24px">
+        <p style="color:var(--muted);margin:0;max-width:44ch">
+          Previews rendered from the app's own Compose layout — same components, same strings
+          as the installed build.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="anchor">
+    <h2>How it works</h2>
+    <p class="sub">A small command bridge is compiled into Bruce. The app speaks a
+      newline-delimited ASCII protocol; nothing else is patched.</p>
+
+    <div class="two">
+      <div>
+        <div class="steps">
+          <div class="step">
+            <div>
+              <h3>Transport</h3>
+              <p>USB-OTG serial at 115200 8N1 through the CH9102 bridge, or BLE using the
+                Nordic UART Service / Bruce's BLE API. Same commands on both.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>Real menu, not a copy</h3>
+              <p>The bridge reads Bruce's global <code>options</code> vector and sets
+                <code>forceMenuOption</code>, <code>EscPress</code> or
+                <code>returnToMenu</code>. The app drives the firmware itself.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>Screen and IR</h3>
+              <p>Text is laid out and drawn on the TFT with the current theme colors. IR uses
+                Bruce's own NEC/Samsung/Sony encoders, so timing stays correct.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>Files</h3>
+              <p>LittleFS paths and payloads travel base64-encoded. Uploads are streamed in
+                256-byte chunks so a 128 KB file fits comfortably in RAM.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <pre><span class="c"># ask for the current menu</span>
+&gt; <span class="o">CMD:MENU:LIST</span>
+&lt; MENU:TITLE:V2lGaQ==
+&lt; MENU:ITEM:0:1:Q29ubmVjdCB0byBXaWZp
+&lt; MENU:END
+
+<span class="c"># open item 0 on the device</span>
+&gt; <span class="o">CMD:MENU:OPEN:0</span>
+&lt; <span class="g">OK:menu:0</span>
+
+<span class="c"># draw text on the Stick</span>
+&gt; <span class="o">CMD:SCREEN:TEXT:SGVsbG8=</span>
+&lt; <span class="g">OK:screen:text</span>
+
+<span class="c"># NEC power code, address 04</span>
+&gt; <span class="o">CMD:IR:NEC:04:08</span>
+&lt; <span class="g">OK:ir:NEC</span>
+
+<span class="c"># list LittleFS</span>
+&gt; <span class="o">CMD:FS:LIST:Lw==</span>
+&lt; FS:ENTRY:D:0:c2NyaXB0cw==
+&lt; FS:LISTEND</pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="install" class="anchor">
+    <h2>Install in four steps</h2>
+    <p class="sub">You need an M5StickC Plus 2, an OTG cable (or Bluetooth) and five minutes.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div>
+          <h3>Back up the Stick (recommended)</h3>
+          <p><code>esptool --port COM3 read-flash 0x0 0x800000 backup.bin</code> — keeps a way
+            back to the stock firmware. The port is a CH9102 UART, VID 1A86 / PID 55D4.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>Flash the merged image</h3>
+          <p><code>esptool --port COM3 --baud 460800 write-flash 0x0 Bruce-m5stack-cplus2.bin</code>.
+            The image is written from address <code>0x0</code> and includes bootloader, partitions
+            and the app.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>Install the APK</h3>
+          <p><code>adb install -r StickCommander-debug.apk</code>, or copy it to the phone and
+            allow installs from unknown sources.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>Connect</h3>
+          <p>USB: connect and grant the USB permission. BLE: enable
+            <b>Config → Advanced → Toggle BLE API</b> on the Stick, then scan from the app.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="note" style="margin-top:22px">
+      The firmware is built on <a href="https://github.com/BruceDevices/firmware">Bruce</a>
+      (AGPL-3.0). Source, patches and the build recipe are in the repository, and every release
+      ships the corresponding firmware source.
+    </p>
+  </section>
+
+  <section id="build" class="anchor">
+    <h2>Build it yourself</h2>
+    <div class="two">
+      <div>
+        <h3 style="margin-top:0">Firmware</h3>
+        <pre>git clone https://github.com/BruceDevices/firmware.git bruce
+cd bruce
+git checkout 1.16.1
+<span class="c"># copy firmware/integration/* over the tree</span>
+pio run -e m5stack-cplus2</pre>
+        <p class="sub" style="margin-top:14px">The integration folder contains the bridge,
+          modified serial task, BLE service changes, the FastLED/LTO patch and the PlatformIO
+          configuration.</p>
+      </div>
+      <div>
+        <h3 style="margin-top:0">Android app</h3>
+        <pre>./gradlew assembleDebug
+./gradlew testDebugUnitTest</pre>
+        <p class="sub" style="margin-top:14px">JDK 17 and Android SDK 35. The project uses
+          Jetpack Compose, Material 3, a repository with an ordered command queue, and both
+          transports behind one interface.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Protocol at a glance</h2>
+    <p class="sub">Everything is line based and human readable. Full reference in
+      <a href="https://github.com/121kirillmorti/stickcommander/blob/main/firmware/README.md">firmware/README.md</a>.</p>
+    <table>
+      <tr><th>Area</th><th>Commands</th></tr>
+      <tr><td>System</td><td><code>CMD:PING</code>, <code>CMD:SYS:STATUS</code>, <code>CMD:TEXT:</code></td></tr>
+      <tr><td>Buttons</td><td><code>CMD:BTN:M5|A|B|PWR:PRESS|RELEASE</code>, <code>CMD:NAV:UP|DOWN|LEFT|RIGHT|OK</code></td></tr>
+      <tr><td>Menu</td><td><code>CMD:MENU:LIST</code>, <code>CMD:MENU:OPEN:n</code>, <code>CMD:MENU:BACK</code>, <code>CMD:MENU:HOME</code></td></tr>
+      <tr><td>Screen</td><td><code>CMD:SCREEN:TEXT:&lt;base64&gt;</code>, <code>CMD:SCREEN:CLEAR</code></td></tr>
+      <tr><td>IR</td><td><code>CMD:IR:NEC|NECEXT|SAMSUNG:a:c</code>, <code>CMD:IR:SONY:a:c:bits</code></td></tr>
+      <tr><td>Files</td><td><code>CMD:FS:LIST|READ|DELETE|MKDIR|RENAME|BEGIN|CHUNK|END|WRITE</code></td></tr>
+      <tr><td>Scripts</td><td><code>CMD:SCRIPT:LIST|RUN|LOAD|STOP</code></td></tr>
+    </table>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 StickCommander · AGPL-3.0</span>
+    <div class="links">
+      <a href="https://github.com/121kirillmorti/stickcommander">GitHub</a>
+      <a href="https://github.com/121kirillmorti/stickcommander/releases/latest">Releases</a>
+      <a href="https://github.com/BruceDevices/firmware">Bruce firmware</a>
+      <a href="ru/">По-русски</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

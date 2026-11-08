@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">StickCommander</string>
+    <string name="notification_channel_connection">Device link</string>
+    <string name="notification_channel_connection_description">Keeps the USB or Bluetooth connection to your M5Stick alive.</string>
+    <string name="notification_title">StickCommander link active</string>
+    <string name="notification_text">Connected to your M5StickC Plus 2</string>
+</resources>

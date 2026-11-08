@@ -1,0 +1,22 @@
+*.iml
+.gradle/
+local.properties
+.idea/
+.DS_Store
+build/
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+output-metadata.json
+
+# StickCommander repo extras
+.kotlin/
+docs/_preview/
+firmware/bruce-src/
+firmware/build/
+firmware/stickcommander_adapter/build/
+firmware/backup/*.bin
+firmware/stock/*.bin
+firmware/bruce-build/*.bin

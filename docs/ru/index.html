@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StickCommander — управление M5StickC Plus 2 с телефона</title>
+<meta name="description" content="Android-приложение и патч прошивки Bruce 1.16.1: живое меню, рисование на экране, ИК-передатчик, менеджер файлов LittleFS и терминал для M5StickC Plus 2.">
+<link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="../"><img src="../assets/logo.svg" alt="">StickCommander</a>
+    <nav class="top">
+      <a href="#features">Возможности</a>
+      <a href="#how">Как работает</a>
+      <a href="#install">Установка</a>
+      <a href="#build">Сборка</a>
+      <a href="https://github.com/121kirillmorti/stickcommander">GitHub</a>
+      <a class="lang" href="../">English</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Android + Bruce 1.16.1</span>
+      <h1>Твой Stick — на <span>экране телефона</span>.</h1>
+      <p class="lead">
+        StickCommander зеркалит настоящее меню Bruce на M5StickC Plus 2, рисует текст на его
+        экране 135×240, отправляет ИК-коды, работает с LittleFS и показывает полный терминал —
+        по USB-OTG или Bluetooth LE.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="https://github.com/121kirillmorti/stickcommander/releases/latest/download/StickCommander-debug.apk">Скачать APK</a>
+        <a class="btn ghost" href="https://github.com/121kirillmorti/stickcommander/releases/latest/download/Bruce-m5stack-cplus2.bin">Скачать прошивку</a>
+        <a class="btn ghost" href="https://github.com/121kirillmorti/stickcommander">Исходники</a>
+      </div>
+      <div class="meta">
+        <span>AGPL-3.0, исходники прошивки в релизе</span>
+        <span>Android 8.0+</span>
+        <span>ESP32 · 8 МБ flash</span>
+      </div>
+    </div>
+    <div class="phone-shot">
+      <img src="../images/dashboard.png" alt="Экран Dashboard в StickCommander">
+    </div>
+  </section>
+
+  <section id="features" class="anchor">
+    <h2>Шесть экранов — один кабель</h2>
+    <p class="sub">Всё, что умеет Stick, разложено по разделам. Приложение общается с прошивкой
+      в обе стороны: телеметрия и состояние меню приходят обратно, команды уходят на устройство.</p>
+
+    <div class="grid g3">
+      <div class="card">
+        <div class="icon">◉</div>
+        <h3>Живое меню Stick</h3>
+        <p>Читает реальный список пунктов прошивки — заголовок, подписи, недоступные пункты и
+          текущее выделение — и обновляется каждую секунду. Тап открывает пункт на Stick.</p>
+      </div>
+      <div class="card">
+        <div class="icon">▤</div>
+        <h3>Зеркало экрана и рисование</h3>
+        <p>Текстовое зеркало интерфейса на телефоне и обратное направление: отправьте текст, и
+          Stick нарисует его на своём TFT.</p>
+      </div>
+      <div class="card">
+        <div class="icon">⌁</div>
+        <h3>ИК-передатчик</h3>
+        <p>NEC, Samsung и Sony (12/15/20 бит), hex-поля и пресеты в один тап. Излучает Stick,
+          телефон лишь говорит, что отправить.</p>
+      </div>
+      <div class="card">
+        <div class="icon">▦</div>
+        <h3>Менеджер файлов</h3>
+        <p>Просмотр LittleFS, предпросмотр текстовых файлов, загрузка своих файлов чанками по
+          256 байт с прогресс-баром, папки, переименование и удаление.</p>
+      </div>
+      <div class="card">
+        <div class="icon">⌘</div>
+        <h3>Пульт</h3>
+        <p>Виртуальный D-pad и кнопки M5/A/B/PWR с удержанием. Нажатие и отпускание — отдельные
+          события, поэтому долгое нажатие работает как на устройстве.</p>
+      </div>
+      <div class="card">
+        <div class="icon">▮</div>
+        <h3>Терминал и скрипты</h3>
+        <p>Логи с фильтрами и ручной ввод команд, плюс скрипты на телефоне: загрузить на Stick
+          и запустить, не трогая устройство.</p>
+      </div>
+    </div>
+
+    <div class="shots" style="margin-top:26px">
+      <div class="shot"><img src="../images/tools-menu.png" alt="Живое меню"><span>Tools · Меню</span></div>
+      <div class="shot"><img src="../images/tools-screen.png" alt="Экран"><span>Tools · Экран</span></div>
+      <div class="shot"><img src="../images/tools-ir.png" alt="ИК"><span>Tools · ИК</span></div>
+      <div class="shot"><img src="../images/tools-files.png" alt="Файлы"><span>Tools · Файлы</span></div>
+    </div>
+    <div class="shots" style="margin-top:14px">
+      <div class="shot"><img src="../images/remote.png" alt="Пульт"><span>Remote</span></div>
+      <div class="shot"><img src="../images/dashboard.png" alt="Dashboard"><span>Dashboard</span></div>
+      <div class="shot" style="grid-column:span 2;display:flex;align-items:center;justify-content:center;padding:24px">
+        <p style="color:var(--muted);margin:0;max-width:44ch">
+          Превью отрисованы по реальной Compose-разметке приложения — те же компоненты и
+          тексты, что в установленной сборке.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="anchor">
+    <h2>Как это работает</h2>
+    <p class="sub">В Bruce компилируется небольшой мост команд. Приложение говорит по
+      построчному ASCII-протоколу; больше ничего не патчится.</p>
+
+    <div class="two">
+      <div>
+        <div class="steps">
+          <div class="step">
+            <div>
+              <h3>Транспорт</h3>
+              <p>USB-OTG serial 115200 8N1 через мост CH9102 или BLE через Nordic UART Service /
+                BLE API Bruce. Команды одинаковые.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>Настоящее меню, а не копия</h3>
+              <p>Мост читает глобальный вектор <code>options</code> и выставляет
+                <code>forceMenuOption</code>, <code>EscPress</code> или
+                <code>returnToMenu</code>. Приложение управляет самой прошивкой.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>Экран и ИК</h3>
+              <p>Текст раскладывается и рисуется на TFT цветами текущей темы. ИК использует
+                штатные кодировщики NEC/Samsung/Sony из Bruce, поэтому тайминги верные.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>Файлы</h3>
+              <p>Пути и данные LittleFS передаются в base64. Загрузка идёт чанками по 256 байт,
+                поэтому файл до 128 КБ спокойно помещается в RAM.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <pre><span class="c"># запросить текущее меню</span>
+&gt; <span class="o">CMD:MENU:LIST</span>
+&lt; MENU:TITLE:V2lGaQ==
+&lt; MENU:ITEM:0:1:Q29ubmVjdCB0byBXaWZp
+&lt; MENU:END
+
+<span class="c"># открыть пункт 0 на устройстве</span>
+&gt; <span class="o">CMD:MENU:OPEN:0</span>
+&lt; <span class="g">OK:menu:0</span>
+
+<span class="c"># нарисовать текст на Stick</span>
+&gt; <span class="o">CMD:SCREEN:TEXT:SGVsbG8=</span>
+&lt; <span class="g">OK:screen:text</span>
+
+<span class="c"># NEC-код питания, адрес 04</span>
+&gt; <span class="o">CMD:IR:NEC:04:08</span>
+&lt; <span class="g">OK:ir:NEC</span>
+
+<span class="c"># список LittleFS</span>
+&gt; <span class="o">CMD:FS:LIST:Lw==</span>
+&lt; FS:ENTRY:D:0:c2NyaXB0cw==
+&lt; FS:LISTEND</pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="install" class="anchor">
+    <h2>Установка за четыре шага</h2>
+    <p class="sub">Нужны M5StickC Plus 2, OTG-кабель (или Bluetooth) и пять минут.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div>
+          <h3>Сделать бэкап (рекомендуется)</h3>
+          <p><code>esptool --port COM3 read-flash 0x0 0x800000 backup.bin</code> — останется путь
+            назад к стоковой прошивке. Порт — CH9102 UART, VID 1A86 / PID 55D4.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>Прошить merged-образ</h3>
+          <p><code>esptool --port COM3 --baud 460800 write-flash 0x0 Bruce-m5stack-cplus2.bin</code>.
+            Образ пишется с адреса <code>0x0</code> и включает bootloader, разделы и приложение.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>Установить APK</h3>
+          <p><code>adb install -r StickCommander-debug.apk</code> или скопировать файл на телефон
+            и разрешить установку из неизвестных источников.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>Подключиться</h3>
+          <p>USB: подключить и разрешить доступ. BLE: включить
+            <b>Config → Advanced → Toggle BLE API</b> на Stick и просканировать из приложения.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="note" style="margin-top:22px">
+      Прошивка построена на <a href="https://github.com/BruceDevices/firmware">Bruce</a>
+      (AGPL-3.0). Исходники, патчи и рецепт сборки лежат в репозитории, а к каждому релизу
+      приложены соответствующие исходники прошивки.
+    </p>
+  </section>
+
+  <section id="build" class="anchor">
+    <h2>Собрать самому</h2>
+    <div class="two">
+      <div>
+        <h3 style="margin-top:0">Прошивка</h3>
+        <pre>git clone https://github.com/BruceDevices/firmware.git bruce
+cd bruce
+git checkout 1.16.1
+<span class="c"># скопировать firmware/integration/* поверх дерева</span>
+pio run -e m5stack-cplus2</pre>
+        <p class="sub" style="margin-top:14px">В папке integration — мост, изменённая задача
+          serial, правки BLE-сервиса, патч FastLED/LTO и конфигурация PlatformIO.</p>
+      </div>
+      <div>
+        <h3 style="margin-top:0">Android-приложение</h3>
+        <pre>./gradlew assembleDebug
+./gradlew testDebugUnitTest</pre>
+        <p class="sub" style="margin-top:14px">Нужны JDK 17 и Android SDK 35. Внутри Jetpack
+          Compose, Material 3, репозиторий с очередью команд и два транспорта за одним
+          интерфейсом.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Протокол кратко</h2>
+    <p class="sub">Всё построчно и читаемо. Полное описание —
+      <a href="https://github.com/121kirillmorti/stickcommander/blob/main/firmware/README.md">firmware/README.md</a>.</p>
+    <table>
+      <tr><th>Область</th><th>Команды</th></tr>
+      <tr><td>Система</td><td><code>CMD:PING</code>, <code>CMD:SYS:STATUS</code>, <code>CMD:TEXT:</code></td></tr>
+      <tr><td>Кнопки</td><td><code>CMD:BTN:M5|A|B|PWR:PRESS|RELEASE</code>, <code>CMD:NAV:UP|DOWN|LEFT|RIGHT|OK</code></td></tr>
+      <tr><td>Меню</td><td><code>CMD:MENU:LIST</code>, <code>CMD:MENU:OPEN:n</code>, <code>CMD:MENU:BACK</code>, <code>CMD:MENU:HOME</code></td></tr>
+      <tr><td>Экран</td><td><code>CMD:SCREEN:TEXT:&lt;base64&gt;</code>, <code>CMD:SCREEN:CLEAR</code></td></tr>
+      <tr><td>ИК</td><td><code>CMD:IR:NEC|NECEXT|SAMSUNG:a:c</code>, <code>CMD:IR:SONY:a:c:bits</code></td></tr>
+      <tr><td>Файлы</td><td><code>CMD:FS:LIST|READ|DELETE|MKDIR|RENAME|BEGIN|CHUNK|END|WRITE</code></td></tr>
+      <tr><td>Скрипты</td><td><code>CMD:SCRIPT:LIST|RUN|LOAD|STOP</code></td></tr>
+    </table>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 StickCommander · AGPL-3.0</span>
+    <div class="links">
+      <a href="https://github.com/121kirillmorti/stickcommander">GitHub</a>
+      <a href="https://github.com/121kirillmorti/stickcommander/releases/latest">Релизы</a>
+      <a href="https://github.com/BruceDevices/firmware">Прошивка Bruce</a>
+      <a href="../">English</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
