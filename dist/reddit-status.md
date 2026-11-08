@@ -15,7 +15,7 @@ Russian for Russian-speaking ones. Every post uses different text.
 | r/INCOGNITO_live | RU | https://www.reddit.com/r/INCOGNITO_live/comments/1xquohk/ | live | Russian IT community |
 | r/opensource | EN | - | removed by AutoMod | subreddit karma gate, no exceptions |
 | r/Pikabu | RU | - | removed by AutoMod | needs >=10 subreddit karma |
-| r/esp32 (first) | EN | - | removed | ReadTheRules app, fixed by acknowledgement |
+| r/esp32 (first) | EN | - | deleted by author | was removed by ReadTheRules; deleted to avoid a duplicate |
 | r/masterhacker (first) | RU | - | deleted by author | Russian text replaced with English version |
 
 Rejected targets (rules/risk): r/hacking, r/netsec, r/cybersecurity, r/HowToHack
